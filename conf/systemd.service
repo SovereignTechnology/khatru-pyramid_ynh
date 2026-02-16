@@ -1,0 +1,31 @@
+[Unit]
+Description=Khatru Pyramid Nostr Relay (__APP__)
+After=network.target
+
+[Service]
+Type=simple
+User=__APP__
+Group=__APP__
+WorkingDirectory=__DATA_DIR__
+ExecStart=__INSTALL_DIR__/khatru-pyramid
+EnvironmentFile=__INSTALL_DIR__/.env
+Restart=on-failure
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+RestrictNamespaces=yes
+RestrictRealtime=yes
+DevicePolicy=closed
+ProtectSystem=full
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+LockPersonality=yes
+SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap
+
+[Install]
+WantedBy=multi-user.target

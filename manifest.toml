@@ -1,0 +1,77 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
+packaging_format = 2
+
+id = "khatru-pyramid"
+name = "Khatru Pyramid"
+description.en = "Nostr relay with invite-based access hierarchy"
+description.fr = "Relais Nostr avec hiérarchie d'accès par invitation"
+
+version = "0.2.2~ynh1"
+
+maintainers = ["SovITservices"]
+
+[upstream]
+license = "Unlicense"
+code = "https://github.com/github-tijlxyz/khatru-pyramid"
+website = "https://github.com/github-tijlxyz/khatru-pyramid"
+
+[integration]
+yunohost = ">= 11.2.30"
+helpers_version = "2.1"
+architectures = ["amd64"]
+multi_instance = true
+ldap = "not_relevant"
+sso = "not_relevant"
+disk = "50M"
+ram.build = "50M"
+ram.runtime = "50M"
+
+[install]
+    [install.domain]
+    type = "domain"
+
+    [install.path]
+    type = "path"
+    default = "/"
+
+    [install.init_main_permission]
+    type = "group"
+    default = "visitors"
+
+    [install.relay_name]
+    ask.en = "Name of your Nostr relay"
+    ask.fr = "Nom de votre relais Nostr"
+    type = "string"
+    example = "My Pyramid Relay"
+
+    [install.relay_pubkey]
+    ask.en = "Relay operator's Nostr public key (hex format)"
+    ask.fr = "Clé publique Nostr de l'opérateur du relais (format hex)"
+    type = "string"
+    example = "07adfda9c5adc80881bb2a5220f6e3181e0c043b90fa115c4f183464022968e6"
+
+[resources]
+
+    [resources.sources.main]
+    in_subdir = false
+    extract = false
+    rename = "khatru-pyramid"
+
+    amd64.url = "https://github.com/github-tijlxyz/khatru-pyramid/releases/download/v0.2.2/khatru-pyramid-v0.2.2-linux-amd64"
+    amd64.sha256 = "e5784abc42be5e9a0b43cfd93414b6c09ea526b6fd5dfe6692d4ae6d5afb97b5"
+
+    autoupdate.strategy = "latest_github_release"
+    autoupdate.asset.amd64 = "khatru-pyramid-.*-linux-amd64"
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.data_dir]
+    subdirs = ["db"]
+
+    [resources.permissions]
+    main.url = "/"
+
+    [resources.ports]
