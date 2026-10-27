@@ -9,7 +9,7 @@ description.fr = "Relais Nostr avec hiérarchie d'accès par invitation"
 
 version = "0.2.2~ynh1"
 
-maintainers = ["SovITservices"]
+maintainers = ["SovereignTechnology"]
 
 [upstream]
 license = "Unlicense"
